@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:simple_icons/simple_icons.dart';
 
 void main() {
@@ -112,7 +113,7 @@ class _MainPageContents extends StatelessWidget {
                   ),),
                   const Text(""),
                   const Text(""),
-                  const Text("Skills Sets",
+                  const Text("Skills",
                     style: TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.w100,
@@ -243,6 +244,7 @@ class _SubpageState extends State<Subpage> {
               },
               child: Text("슈슉 슈숙.슉.", style: TextStyle(fontWeight: FontWeight.w800),)
             ),
+            const Text(""),
             AnimatedContainer(
               transform: Matrix4.identity()
               ..translate(_rand_posx, _rand_posy),
@@ -288,6 +290,7 @@ class _MainBottomAppBar extends StatefulWidget {
 class __MainBottomAppBarState extends State<_MainBottomAppBar> with SingleTickerProviderStateMixin {
   
   var _bSearchOpen = false;
+  var _bMenuOpen = false;
   late AnimationController _controller;
   late Animation<Offset> _searchAnimation;
 
@@ -297,7 +300,6 @@ class __MainBottomAppBarState extends State<_MainBottomAppBar> with SingleTicker
     _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 300));
     _searchAnimation = Tween<Offset>(begin: const Offset(0,0), end: const Offset(0, 1.5))
         .animate(CurvedAnimation(parent: _controller, curve: Curves.easeInCubic));
-    // _controller.reverse();
     _controller.forward();
   }
 
@@ -306,7 +308,7 @@ class __MainBottomAppBarState extends State<_MainBottomAppBar> with SingleTicker
     return BottomAppBar(
       height: 40.0,
       padding: const EdgeInsets.fromLTRB(8, 2, 8, 2),
-      color: Colors.brown[400],
+      color: Colors.brown[300],
       child: IconTheme(
         data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
         child: Row(
@@ -315,7 +317,10 @@ class __MainBottomAppBarState extends State<_MainBottomAppBar> with SingleTicker
               tooltip: 'Open navigation menu',
               icon: const Icon(Icons.menu),
               padding: const EdgeInsets.all(0),
-              onPressed: () {},
+              onPressed: () {
+                if (_bMenuOpen){ _controller.forward(); } else { _controller.reverse(); }
+                _bMenuOpen = !_bMenuOpen;
+              },
             ),
             // if (centerLocations.contains(fabLocation)) const Spacer(),
             IconButton(
@@ -342,14 +347,13 @@ class __MainBottomAppBarState extends State<_MainBottomAppBar> with SingleTicker
               child: const SizedBox(
                 width: 250,
                 child: TextField(
-                  obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Search',
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
