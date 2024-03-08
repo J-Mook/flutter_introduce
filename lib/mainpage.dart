@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_icons/simple_icons.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +52,7 @@ class _MainPageContents extends StatefulWidget {
 
 class __MainPageContentsState extends State<_MainPageContents> {
   
-  final double _change_width = 800.0;
+  final double _change_width = 850.0;
   double _hit = 0.0;
   double _wid = 0.0;
 
@@ -103,7 +104,7 @@ class _name_contents extends StatelessWidget {
 
   List<Widget> _contents() {
     return [
-      const Text(""),
+      SizedBox(height: 200,),
       const Row( mainAxisAlignment: MainAxisAlignment.center, children: [
         Text("J",
           style: TextStyle(
