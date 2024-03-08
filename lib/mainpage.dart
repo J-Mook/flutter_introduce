@@ -4,6 +4,7 @@ import 'package:simple_icons/simple_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:image/image.dart' as IMG;
 import '/provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -22,12 +23,12 @@ class _MainPageState extends State<MainPage> {
           IconButton(
             icon: const Icon(SimpleIcons.github),
             tooltip: 'Open jmook\'s GitHub',
-            onPressed: () { },
+            onPressed: () {launchUrl("https://github.com/J-Mook");},
           ),
           IconButton(
             icon: const Icon(SimpleIcons.tistory),
             tooltip: 'Open jmook\'s blog',
-            onPressed: () { },
+            onPressed: () {launchUrl("https://jmook.tistory.com");},
           ),
         ],
       ),
