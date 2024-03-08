@@ -216,11 +216,23 @@ class _SubpageState extends State<Subpage> {
     super.initState();
   }
 
+  double _mouse_x = 0.0;
+  double _mouse_y = 0.0;
+  void _updateLocation(PointerEvent details) {
+    setState(() {
+      _mouse_x = details.position.dx;
+      _mouse_y = details.position.dy;
+    });
+  }
+
   void _randomzie(){
-    _rand_posx = (Random().nextDouble() - 0.5) * 300;
-    _rand_posy = (Random().nextDouble()) * 300;
+    _rand_posx = _mouse_x;
+    _rand_posy = _mouse_y;
+    // _rand_posx = (Random().nextDouble() - 0.5) * 300;
+    // _rand_posy = (Random().nextDouble()) * 300;
     // _rand_width = Random().nextDouble() * 100;
     // _rand_height = Random().nextDouble() * 100;
+    
     _rand_color = Color.fromRGBO(
       Random().nextInt(255),
       Random().nextInt(255),
@@ -234,41 +246,47 @@ class _SubpageState extends State<Subpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Center(
-        child: Column(
-          children: [
-            ElevatedButton(
-              onPressed: () async {
-                _onPlay = !_onPlay;
-                if(_onPlay) _randomzie();
-              },
-              child: Text("슈슉 슈숙.슉.", style: TextStyle(fontWeight: FontWeight.w800),)
-            ),
-            const Text(""),
-            AnimatedContainer(
-              transform: Matrix4.identity()
-              ..translate(_rand_posx, _rand_posy),
-              width: _rand_width,
-              height: _rand_height,
-              color: _rand_color,
-              duration: Duration(milliseconds: 500),
-              curve: Curves.fastOutSlowIn,
-              child: TextButton(
-                onPressed:(){
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    '/',
-                    (route) => false
-                  );
-                },
-                child: Center(child: const Icon(Icons.home_filled),)
-              ),
-              onEnd: () {
-                if(_onPlay) _randomzie();
-              },
-            ),
-          ],
-        ) 
+      body: MouseRegion(
+        onHover: _updateLocation, 
+        child: Container(color: Colors.redAccent,
+          child:  Flexible(
+            fit: FlexFit.tight,
+            child: Column(
+              children: [
+                ElevatedButton(
+                  onPressed: () async {
+                    _onPlay = !_onPlay;
+                    if(_onPlay) _randomzie();
+                  },
+                  child: Text("슈슉 슈숙.슉.", style: TextStyle(fontWeight: FontWeight.w800),)
+                ),
+                const Text(""),
+                AnimatedContainer(
+                  transform: Matrix4.identity()
+                  ..translate(_rand_posx, _rand_posy),
+                  width: _rand_width,
+                  height: _rand_height,
+                  color: _rand_color,
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.fastOutSlowIn,
+                  child: TextButton(
+                    onPressed:(){
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        '/',
+                        (route) => false
+                      );
+                    },
+                    child: Center(child: const Icon(Icons.home_filled),)
+                  ),
+                  onEnd: () {
+                    if(_onPlay) _randomzie();
+                  },
+                ),
+              ],
+            )
+          )
+        )
       ),
       // floatingActionButton: FloatingActionButton(
       //   onPressed: () {
