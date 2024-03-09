@@ -145,20 +145,20 @@ class _name_contents extends StatelessWidget {
           textAlign: TextAlign.right,
           style: TextStyle(
             fontSize: 35.0,
-            fontWeight: FontWeight.w100,
+            fontWeight: FontWeight.w400,
         ),),
         Wrap(direction: Axis.horizontal, alignment: WrapAlignment.end, children: [
           Text("Won",
             textAlign: TextAlign.right,
             style: TextStyle(
               fontSize: 35.0,
-              fontWeight: FontWeight.w100,
+              fontWeight: FontWeight.w200,
           ),),
           Text("Mook",
             textAlign: TextAlign.right,
             style: TextStyle(
               fontSize: 35.0,
-              fontWeight: FontWeight.w100,
+              fontWeight: FontWeight.w200,
           ),),
         ],),
       ],),
