@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:simple_icons/simple_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:image/image.dart' as IMG;
@@ -53,7 +51,7 @@ class _MainPageContents extends StatefulWidget {
 }
 
 class __MainPageContentsState extends State<_MainPageContents> {
-  
+    
   final double _change_width = 850.0;
   double _hit = 0.0;
   double _wid = 0.0;
@@ -290,7 +288,7 @@ class _MainBottomAppBar extends StatefulWidget {
 }
 
 class __MainBottomAppBarState extends State<_MainBottomAppBar> with SingleTickerProviderStateMixin {
-  
+    
   var _bSearchOpen = false;
   var _bMenuOpen = false;
   late AnimationController _controller;
