@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:simple_icons/simple_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:image/image.dart' as IMG;
@@ -23,12 +24,12 @@ class _MainPageState extends State<MainPage> {
           IconButton(
             icon: const Icon(SimpleIcons.github),
             tooltip: 'Open jmook\'s GitHub',
-            onPressed: () {launchUrl("https://github.com/J-Mook");},
+            onPressed: () {launchUrl(Uri.parse("https://github.com/J-Mook"));},
           ),
           IconButton(
             icon: const Icon(SimpleIcons.tistory),
             tooltip: 'Open jmook\'s blog',
-            onPressed: () {launchUrl("https://jmook.tistory.com");},
+            onPressed: () {launchUrl(Uri.parse("https://jmook.tistory.com"));},
           ),
         ],
       ),
@@ -85,13 +86,46 @@ class __MainPageContentsState extends State<_MainPageContents> {
 
     _wid > _change_width ? context.read<layoutProv>().set_hlayout() : context.read<layoutProv>().set_vlayout();
 
+    // return ListView(
+    //   scrollDirection: Axis.vertical,
+    //   children: const [
+    //     Wrap(
+    //       direction: Axis.horizontal,
+    //       alignment: WrapAlignment.center,
+    //       spacing: 10.0,
+    //       runSpacing: 5.0,
+    //       children: [
+    //         _name_contents(),
+    //         _historic_contents(),
+    //       ],
+    //     )
+    //   ],
+    // );
+    
     return Container(
-      child: context.read<layoutProv>().get_hlayout() ? Row(
+      child: context.read<layoutProv>().get_hlayout() ?
+      const Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: _flex_widgets(3, 2),
-      ) : ListView(
-        scrollDirection: Axis.vertical,
-        children: _flex_widgets(3, 2),
+        children: [
+          Flexible(
+            fit: FlexFit.tight,
+            flex: 3,
+            child: _name_contents(),
+          ),
+          // const VerticalDivider(thickness: 1, width: 0,),
+          Flexible(
+            fit: FlexFit.tight,
+            flex: 2,
+            child: _historic_contents(),
+          ),
+        ],
+      ) : Center(child: ListView(
+          scrollDirection: Axis.vertical,
+          children: const [
+            _name_contents(),
+            _historic_contents(),
+          ],
+        ),
       )
     );
   }
@@ -105,19 +139,28 @@ class _name_contents extends StatelessWidget {
 
   List<Widget> _contents() {
     return [
-      SizedBox(height: 200,),
-      const Row( mainAxisAlignment: MainAxisAlignment.center, children: [
-        Text("J",
-          style: TextStyle(
-            fontSize: 50.0,
-            fontWeight: FontWeight.w400,
-        ),),
-        Text("eong WonMook",
+      const SizedBox(height: 200,),
+      const Wrap(direction: Axis.horizontal, alignment: WrapAlignment.end, spacing: 10.0, children: [
+        Text("Jeong",
           textAlign: TextAlign.right,
           style: TextStyle(
             fontSize: 35.0,
             fontWeight: FontWeight.w100,
         ),),
+        Wrap(direction: Axis.horizontal, alignment: WrapAlignment.end, children: [
+          Text("Won",
+            textAlign: TextAlign.right,
+            style: TextStyle(
+              fontSize: 35.0,
+              fontWeight: FontWeight.w100,
+          ),),
+          Text("Mook",
+            textAlign: TextAlign.right,
+            style: TextStyle(
+              fontSize: 35.0,
+              fontWeight: FontWeight.w100,
+          ),),
+        ],),
       ],),
       const Text("Softerware Developer",
         textAlign: TextAlign.right,
@@ -153,6 +196,15 @@ class _name_contents extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // return Container(
+    //   padding: const EdgeInsets.all(50),
+    //   color: Colors.amber[100],
+    //   child: SizedBox(
+    //     width: 600,
+    //     child: Column( children: _contents() )
+    //   ),
+    // );
+
     return Container(
       padding: const EdgeInsets.all(50),
       color: Colors.amber[100],
@@ -207,6 +259,17 @@ class _historic_contents extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // return Container(
+    //   padding: const EdgeInsets.all(40),
+    //   color: Colors.brown[100],
+    //   child: SizedBox(
+    //     width: 300,
+    //     child: DefaultTextStyle(
+    //       style: _historic_textstyle,
+    //       child: Column( children: _context ),
+    //     ),
+    //   ),
+    // );
     return Container(
       padding: const EdgeInsets.all(40),
       color: Colors.brown[100],
