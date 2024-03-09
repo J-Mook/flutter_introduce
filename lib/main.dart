@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_icons/simple_icons.dart';
 import '/provider/provider.dart';
 import 'mainpage.dart';
 
@@ -28,21 +29,77 @@ class _MainAppState extends State<MainApp> {
       routes: {
         '/' : (context) => MainPage(),
         '/home' : (context) => MainPage(),
-        '/sub' : (context) => Subpage(),
+        '/sub' : (context) => SubPage(),
+        '/cal' : (context) => CalPage(),
       },
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class Subpage extends StatefulWidget {
-  const Subpage({super.key});
+class CalPage extends StatefulWidget {
+  CalPage({super.key});
 
   @override
-  State<Subpage> createState() => _SubpageState();
+  State<CalPage> createState() => _CalPageState();
 }
 
-class _SubpageState extends State<Subpage> {
+class _CalPageState extends State<CalPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Calcutator??"),
+      ),
+      body: Center(
+        child: Container(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  SizedBox(width: 50, height: 50, child: Container(color: Colors.amber, child: TextButton(onPressed:() { }, child: Text("7"))),),
+                  SizedBox(width: 50, height: 50, child: Container(color: Colors.amber, child: TextButton(onPressed:() { }, child: Text("8"))),),
+                  SizedBox(width: 50, height: 50, child: Container(color: Colors.amber, child: TextButton(onPressed:() { }, child: Text("9"))),),
+                ],
+              ),
+              Row(
+                children: [
+                  SizedBox(width: 50, height: 50, child: Container(color: Colors.amber, child: TextButton(onPressed:() { }, child: Text("4"))),),
+                  SizedBox(width: 50, height: 50, child: Container(color: Colors.amber, child: TextButton(onPressed:() { }, child: Text("5"))),),
+                  SizedBox(width: 50, height: 50, child: Container(color: Colors.amber, child: TextButton(onPressed:() { }, child: Text("6"))),),
+                ],
+              ),
+              Row(
+                children: [
+                  SizedBox(width: 50, height: 50, child: Container(color: Colors.amber, child: TextButton(onPressed:() { }, child: Text("1"))),),
+                  SizedBox(width: 50, height: 50, child: Container(color: Colors.amber, child: TextButton(onPressed:() { }, child: Text("2"))),),
+                  SizedBox(width: 50, height: 50, child: Container(color: Colors.amber, child: TextButton(onPressed:() { }, child: Text("3"))),),
+                ],
+              ),
+              Row(
+                children: [
+                  SizedBox(width: 100, height: 50, child: Container(color: Colors.amber, child: TextButton(onPressed:() { }, child: Text("0"))),),
+                  SizedBox(width: 50, height: 50, child: Container(color: Colors.amber, child: TextButton(onPressed:() { }, child: Text("."))),),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+      // bottomNavigationBar: ,
+    );
+  }
+}
+
+
+class SubPage extends StatefulWidget {
+  const SubPage({super.key});
+
+  @override
+  State<SubPage> createState() => _SubPageState();
+}
+
+class _SubPageState extends State<SubPage> {
 
   double _wid = 0.0;
   double _hit = 0.0;

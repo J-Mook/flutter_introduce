@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:simple_icons/simple_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:image/image.dart' as IMG;
@@ -86,15 +87,35 @@ class __MainPageContentsState extends State<_MainPageContents> {
 
     // return ListView(
     //   scrollDirection: Axis.vertical,
-    //   children: const [
-    //     Wrap(
-    //       direction: Axis.horizontal,
-    //       alignment: WrapAlignment.center,
-    //       spacing: 10.0,
-    //       runSpacing: 5.0,
+    //   children: [
+    //     Stack(
     //       children: [
-    //         _name_contents(),
-    //         _historic_contents(),
+    //         Row(
+    //           mainAxisAlignment: MainAxisAlignment.center,
+    //           children: [
+    //             Flexible(
+    //               fit: FlexFit.tight,
+    //               flex: 3,
+    //               child: Container( color: Colors.amber, child: Text(" "),),
+    //             ),
+    //             Flexible(
+    //               fit: FlexFit.tight,
+    //               flex: 2,
+    //               child: Container( color: Colors.brown, child: Text(" "),),
+    //             ),
+    //           ],
+    //         ),
+    //         Wrap(
+    //           direction: Axis.horizontal,
+    //           alignment: WrapAlignment.center,
+    //           spacing: 10.0,
+    //           runSpacing: 5.0,
+    //           children: [
+    //             _name_contents(),
+    //             _historic_contents(),
+    //           ]
+    //         ),
+
     //       ],
     //     )
     //   ],
@@ -208,10 +229,6 @@ class _name_contents extends StatelessWidget {
       color: Colors.amber[100],
       child: context.read<layoutProv>().get_hlayout() ? 
           ListView( children: _contents(), padding: EdgeInsets.all(0), ) : Column( children: _contents() )
-      // child: Column(
-      //   mainAxisAlignment: MainAxisAlignment.center,
-      //   children: _contents(),
-      // ),
     );
   }
 }
@@ -323,6 +340,14 @@ class __MainBottomAppBarState extends State<_MainBottomAppBar> with SingleTicker
               },
             ),
             // if (centerLocations.contains(fabLocation)) const Spacer(),
+            IconButton(
+              tooltip: 'calculater',
+              icon: const Icon(Icons.calculate),
+              padding: const EdgeInsets.all(0),
+              onPressed: () {
+                Navigator.pushNamed(context, '/cal');
+              },
+            ),
             IconButton(
               tooltip: 'Search',
               icon: const Icon(Icons.search),
