@@ -5,6 +5,11 @@ class layoutProv with ChangeNotifier {
   bool _layout_hor = false;
   bool _layout_ver = true;
 
+  String _sel_Skills = "";
+
+  void selectSkill(String str){ _sel_Skills = str; }
+  String getselSkill(){ return _sel_Skills; }
+
   void set_hlayout(){
     _layout_hor = true;
     _layout_ver = false;

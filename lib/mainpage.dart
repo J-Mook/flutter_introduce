@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:simple_icons/simple_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:image/image.dart' as IMG;
+import 'package:tuple/tuple.dart';
 import '/provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -19,6 +20,13 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("JMook's Introduction"),
+        leading: IconButton(
+          icon: const Icon(Icons.home),
+          tooltip: 'Open jmook\'s blog',
+          onPressed: () {
+            Navigator.pushNamedAndRemoveUntil( context, '/', (route) => false );
+          },
+        ),
         actions: <Widget>[
           IconButton(
             icon: const Icon(SimpleIcons.github),
@@ -36,7 +44,7 @@ class _MainPageState extends State<MainPage> {
       bottomNavigationBar: _MainBottomAppBar(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          setState(() { Navigator.pushNamed(context, '/sub'); });
+          setState(() { Navigator.pushNamed(context, '/RandColor'); });
         },
         child: const Icon(Icons.link),
       ),
@@ -150,13 +158,40 @@ class __MainPageContentsState extends State<_MainPageContents> {
   }
 }
 
-class _name_contents extends StatelessWidget {
+class _name_contents extends StatefulWidget {
   const _name_contents({super.key});
+
+  @override
+  State<_name_contents> createState() => __name_contentsState();
+}
+
+class __name_contentsState extends State<_name_contents> {
+
   // static Image profile_image = Image.asset("assets/picpic.jpg");
   // static Image profile_image = Image(image: ResizeImage(AssetImage('assets/picpic.jpg'), width: 200));
-  static const List<String> _skillsets = ["Git", "Qt", "MFC", "Python", "Pytorch", "Ubuntu", "ROS", "Open3D", "C/C++"];
+  // static const List<String> _skillsets = ["Git", "Qt", "MFC", "Python", "Pytorch", "Ubuntu", "ROS", "Open3D", "C/C++"];
+  static const List<Tuple2<String, Icon>> _skillsetsi = [
+    Tuple2("C/C++", Icon(SimpleIcons.cplusplus)),
+    Tuple2("Git", Icon(SimpleIcons.git)),
+    Tuple2("VSCode", Icon(SimpleIcons.visualstudiocode)),
+    Tuple2("Qt", Icon(SimpleIcons.qt)),
+    Tuple2("MFC", Icon(SimpleIcons.microsoft)),
+    Tuple2("Python", Icon(SimpleIcons.python)),
+    Tuple2("Pytorch", Icon(SimpleIcons.pytorch)),
+    Tuple2("Ubuntu", Icon(SimpleIcons.ubuntu)),
+    Tuple2("ROS", Icon(SimpleIcons.ros)),
+    Tuple2("Open3D", Icon(SimpleIcons.opencv)),
+    Tuple2("RsbrPi", Icon(SimpleIcons.raspberrypi)),
+    Tuple2("Arduino", Icon(SimpleIcons.arduino)),
+    Tuple2("Flutter", Icon(SimpleIcons.flutter)),
+    Tuple2("Rust", Icon(SimpleIcons.rust)),
+    Tuple2("Jenkins", Icon(SimpleIcons.jenkins)),
+    Tuple2("Cuda", Icon(SimpleIcons.nvidia)),
+  ];
+  String _sel_button = "";
 
   List<Widget> _contents() {
+    _sel_button = context.read<layoutProv>().getselSkill();
     return [
       const SizedBox(height: 200,),
       const Wrap(direction: Axis.horizontal, alignment: WrapAlignment.end, spacing: 10.0, children: [
@@ -199,14 +234,25 @@ class _name_contents extends StatelessWidget {
         alignment: WrapAlignment.start,
         spacing: 10.0,
         runSpacing: 5.0,
-        children: _skillsets.map((e){
+        children: _skillsetsi.map((_cont){
           return OutlinedButton(
             style: OutlinedButton.styleFrom(
-              padding: EdgeInsets.all(5),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))
+              padding: const EdgeInsets.fromLTRB(5, 15, 5, 10),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              backgroundColor: _sel_button == _cont.item1 ? Color.fromARGB(100, 103, 80, 168) : Colors.transparent,
             ),
-            onPressed: (){},
-            child: Text(e),
+            onPressed: (){
+              _sel_button = _cont.item1;
+              if(context.read<layoutProv>().getselSkill() == _sel_button) { _sel_button = ""; }
+              context.read<layoutProv>().selectSkill(_sel_button);
+              setState(() { });
+            },
+            child: Column(
+              children: [
+                _cont.item2,
+                Text(_cont.item1, style: TextStyle(fontWeight: _sel_button == _cont.item1 ? FontWeight.w600 : FontWeight.w400),),
+              ],
+            ),
           );
         }).toList(),
       ),
