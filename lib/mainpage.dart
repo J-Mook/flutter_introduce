@@ -181,7 +181,7 @@ class __name_contentsState extends State<_name_contents> {
     Tuple2("Ubuntu", Icon(SimpleIcons.ubuntu)),
     Tuple2("ROS", Icon(SimpleIcons.ros)),
     Tuple2("Open3D", Icon(SimpleIcons.opencv)),
-    Tuple2("RsbrPi", Icon(SimpleIcons.raspberrypi)),
+    Tuple2("RasPi", Icon(SimpleIcons.raspberrypi)),
     Tuple2("Arduino", Icon(SimpleIcons.arduino)),
     Tuple2("Flutter", Icon(SimpleIcons.flutter)),
     Tuple2("Rust", Icon(SimpleIcons.rust)),
