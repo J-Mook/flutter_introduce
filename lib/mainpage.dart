@@ -20,6 +20,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("JMook's Introduction"),
+        toolbarHeight: 45.0,
         leading: IconButton(
           icon: const Icon(Icons.home),
           tooltip: 'Open jmook\'s blog',
@@ -193,7 +194,7 @@ class __name_contentsState extends State<_name_contents> {
   List<Widget> _contents() {
     _sel_button = context.read<layoutProv>().getselSkill();
     return [
-      const SizedBox(height: 200,),
+      const SizedBox(height: 100,),
       const Wrap(direction: Axis.horizontal, alignment: WrapAlignment.end, spacing: 10.0, children: [
         Text("Jeong",
           textAlign: TextAlign.right,
