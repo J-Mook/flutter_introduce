@@ -396,6 +396,14 @@ class __MainBottomAppBarState extends State<_MainBottomAppBar> with SingleTicker
               },
             ),
             IconButton(
+              tooltip: 'calculater',
+              icon: const Icon(Icons.pages),
+              padding: const EdgeInsets.all(0),
+              onPressed: () {
+                Navigator.pushNamed(context, '/mdview');
+              },
+            ),
+            IconButton(
               tooltip: 'Search',
               icon: const Icon(Icons.search),
               padding: const EdgeInsets.all(0),

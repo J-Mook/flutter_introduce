@@ -7,6 +7,7 @@ environment:
   sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
+  flutter_markdown: ^0.6.21
   simple_icons: ^10.1.3
   provider: ^6.1.2
   image: ^4.1.7
@@ -22,7 +23,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  assets:
+  assets: 
+    - assets/sample.md
 
 linter:
   rules:
